@@ -1,0 +1,28 @@
+#!/usr/bin/env python3
+import connexion
+import os
+from {{packageName}} import encoder
+
+{{#featureCORS}}
+from flask_cors import CORS
+{{/featureCORS}}
+
+def create_app(app_config):
+    """create the flask app"""
+
+    app = connexion.App(__name__, specification_dir='./openapi/')
+    app.app.json_encoder = encoder.JSONEncoder
+    app.add_api('openapi.yaml',
+                arguments={'title': '{{appName}}'},
+                pythonic_params=True)
+
+{{#featureCORS}}
+    # add CORS support
+    CORS(app.app)
+{{/featureCORS}}
+
+    app.app.config.from_object(app_config)
+
+    # register_extensions(app.app)
+    # configure_database(app.app)
+    return app
