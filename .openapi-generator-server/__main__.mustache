@@ -1,0 +1,44 @@
+#!/usr/bin/env python3
+
+import flask
+from openapi_server import encoder, create_app
+from decouple import config
+from openapi_server.config import CONFIG_DICT
+
+DEBUG = config('DEBUG', default=False)
+
+# The configuration
+get_config_mode = 'Debug' if DEBUG else 'Production'
+
+
+try:
+    # Load the configuration using the default values
+    app_config = CONFIG_DICT[get_config_mode.capitalize()]
+except KeyError:
+    exit('Error: Invalid <config_mode>. Expected values [Debug, Production] ')
+
+
+app = create_app(app_config)
+application = app.app
+
+
+@application.route("/", methods=['GET'])
+def swagger_ui():
+    return flask.redirect("{{contextPath}}/ui")
+
+
+@application.route("{{contextPath}}/docs", methods=['GET'])
+@application.route("{{contextPath}}/docs/", methods=['GET'])
+@application.route("{{contextPath}}/docs/index", methods=['GET'])
+@application.route("{{contextPath}}/docs/index.html", methods=['GET'])
+def api_docs():
+    """serve up documentation"""
+    static_dir = os.getcwd() + "/openapi_server/docs"
+    if not os.path.isdir(static_dir):
+        static_dir = os.getcwd() + "/server/openapi_server/docs"
+
+    return flask.send_from_directory(static_dir, 'index.html')
+
+
+if __name__ == '__main__':
+    app.run(port={{serverPort}})

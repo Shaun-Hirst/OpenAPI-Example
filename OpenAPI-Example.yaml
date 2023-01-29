@@ -1,0 +1,226 @@
+openapi: 3.0.3
+x-stoplight:
+  id: n9l4t54u4nz79
+info:
+  title: OpenAPI Example
+  version: '1.0'
+  description: a collection of openapi example endpoints
+  contact:
+    name: Shaun Hirst
+    email: shaun.hirst@icloud.com
+servers:
+  - url: 'http://localhost:3000/openapi_examples'
+paths:
+  /types/string:
+    get:
+      summary: Your GET endpoint
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                example: Hello World
+                description: the returned string
+              examples:
+                Example 1:
+                  value: Hello World
+      operationId: get-example-string
+      description: Get string
+      tags:
+        - types
+    parameters: []
+  /types/datetime:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: date-time
+              examples:
+                Example 1:
+                  value: '2019-08-24T14:15:22Z'
+      operationId: get-examples-datetime
+      description: get date time
+  /types/number:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+                example: 12345
+              examples:
+                Example 1:
+                  value: 12345
+      operationId: get-examples-number
+      description: get number
+  /types/integer:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: integer
+                example: 14
+              examples:
+                Example 1:
+                  value: 14
+      operationId: get-examples-integer
+      description: get integer
+  /types/model:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/simple'
+              examples:
+                Example 1:
+                  value:
+                    id: 464cb121-92a4-4e28-86ba-f4a91a31439c
+                    name: string
+                    created: '2019-08-24T14:15:22Z'
+      operationId: get-examples-model
+      description: get model
+    parameters: []
+  /types/modelarray:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/simple'
+              examples:
+                Example 1:
+                  value:
+                    - id: 464cb121-92a4-4e28-86ba-f4a91a31439c
+                      name: string
+                      created: '2019-08-24T14:15:22Z'
+      operationId: get-examples-modelarray
+      description: get array or models
+  /types/file:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+      operationId: get-examples-file
+      description: get file
+  /types/uuid:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: string
+                format: uuid
+                minLength: 36
+                maxLength: 36
+                example: 464cb121-92a4-4e28-86ba-f4a91a31439c
+      operationId: get-examples-uuid
+      description: get uuid
+  /types/float:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: number
+                format: float
+              examples:
+                Example 1:
+                  value: 3.4028236
+      operationId: get-examples-float
+      description: get float/double
+  /types/boolean:
+    get:
+      summary: Your GET endpoint
+      tags:
+        - types
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: boolean
+              examples:
+                Example 1:
+                  value: true
+      operationId: get-types-boolean
+      description: get boolean
+tags:
+  - name: types
+    description: example of types
+components:
+  schemas:
+    simple:
+      title: simple
+      x-stoplight:
+        id: l0hiwzlcq56j6
+      type: object
+      description: simple model
+      properties:
+        id:
+          type: string
+          format: uuid
+          minLength: 36
+          maxLength: 36
+          example: 464cb121-92a4-4e28-86ba-f4a91a31439c
+        name:
+          type: string
+        created:
+          type: string
+          format: date-time
+      x-examples:
+        Example 1:
+          id: 464cb121-92a4-4e28-86ba-f4a91a31439c
+          name: string
+          created: '2019-08-24T14:15:22Z'
