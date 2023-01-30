@@ -11,7 +11,6 @@ jobs:
     - uses: actions/checkout@v3
     - name: swagger-validator
       uses: mbowman100/swagger-validator-action@master
-      if: env.FILE_COUNT != '0' # Comment out if you want it to fail if no files found
       with:
         files: $(git ls-files '*.ymal')
         # files: ${{ steps.getfiles.outputs.file_list }} # For if you're using output
