@@ -9,20 +9,9 @@ jobs:
 
     steps:
     - uses: actions/checkout@v3
-    - name: Get OpenAPI files
-      id: getfiles
-      run:  |
-        # Using github env (newline separated file list)
-        echo 'FILE_LIST<<EOF' >> $GITHUB_ENV
-        find lib -type f -iname "*.yaml" >> $GITHUB_ENV
-        echo 'EOF' >> $GITHUB_ENV
-
-        # Using step output (space separated file list)
-        FILES="$(find lib -type f -iname "*.yaml")"
-        echo "::set-output name=file_list::$FILES"
     - name: swagger-validator
       uses: mbowman100/swagger-validator-action@master
       if: env.FILE_COUNT != '0' # Comment out if you want it to fail if no files found
       with:
-        files: ${{ env.FILE_LIST }}
+        files: $(git ls-files '*.ymal')
         # files: ${{ steps.getfiles.outputs.file_list }} # For if you're using output
