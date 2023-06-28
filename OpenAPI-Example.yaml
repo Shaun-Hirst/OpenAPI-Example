@@ -3,7 +3,7 @@ x-stoplight:
   id: n9l4t54u4nz79
 info:
   title: OpenAPI Example
-  version: '1.0'
+  version: '1.0.0'
   description: a collection of openapi example endpoints
   contact:
     name: Shaun Hirst
