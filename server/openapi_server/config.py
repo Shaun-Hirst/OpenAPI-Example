@@ -4,7 +4,7 @@
 """
 api server database connection config
 
-creator: shaun.hirst@bt.com
+creator: shaun.hirst@3adesign.co.uk
 created: 26/02/2020
 """
 
