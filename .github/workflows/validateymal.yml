@@ -12,5 +12,5 @@ jobs:
     - name: swagger-validator
       uses: mbowman100/swagger-validator-action@master
       with:
-        files: OpenAPI-Example.yaml
+        files: openapi.yaml
         # files: ${{ steps.getfiles.outputs.file_list }} # For if you're using output
