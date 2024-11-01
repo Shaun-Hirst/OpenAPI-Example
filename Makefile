@@ -17,7 +17,7 @@ build-server-local: clean
                    -v ${PWD}:/local openapitools/openapi-generator-cli:v${GEN_VER} generate \
 				   --additional-properties=apiNameSuffix=controller_impl \
                    -t /local/.templates/${GEN_VER}/.openapi-generator-server/ \
-                   -i /local/${API_NAME}.yaml \
+                   -i /local/openapi.yaml \
                    -g python-flask \
                    -o /local/server/
 
