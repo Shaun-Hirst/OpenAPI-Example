@@ -13,13 +13,19 @@ build-server: clean
                    -o server/
 
 build-server-local: clean
-	docker run --user ${USER}\:${GROUP} --rm \
+	docker run --user ${USER}:${GROUP} --rm \
                    -v ${PWD}:/local openapitools/openapi-generator-cli:v${GEN_VER} generate \
 				   --additional-properties=apiNameSuffix=controller_impl \
-                   -t /local/.openapi-generator-server/ \
+                   -t /local/.templates/${GEN_VER}/.openapi-generator-server/ \
                    -i /local/${API_NAME}.yaml \
                    -g python-flask \
                    -o /local/server/
 
+extract-templates:
+	docker run --user ${USER}:${GROUP} --rm \
+                   -v ${PWD}:/local \
+                   openapitools/openapi-generator-cli:v${GEN_VER} author template \
+                   -g python-flask \
+                   -o /local/.templates/${GEN_VER}/.openapi-generator-server/
 clean:
 	rm -f -r client python_server dist *.egg-info
