@@ -27,5 +27,20 @@ extract-templates:
                    openapitools/openapi-generator-cli:v${GEN_VER} author template \
                    -g python-flask \
                    -o /local/.templates/${GEN_VER}/.openapi-generator-server/
+
+extract-templates-flask:
+	docker run --user ${USER}:${GROUP} --rm \
+                   -v ${PWD}:/local \
+                   openapitools/openapi-generator-cli:v${GEN_VER} author template \
+                   -g python-flask \
+                   -o /local/.templates/${GEN_VER}/python_flask/.openapi-generator-server/
+
+extract-templates-fastapi:
+	docker run --user ${USER}:${GROUP} --rm \
+                   -v ${PWD}:/local \
+                   openapitools/openapi-generator-cli:v${GEN_VER} author template \
+                   -g python-fastapi \
+                   -o /local/.templates/${GEN_VER}/python_fastapi/.openapi-generator-server/
+
 clean:
 	rm -f -r client python_server dist *.egg-info
